@@ -1,11 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="36e2e8fa-2eb7-400b-8942-b93742451016" name="Changes" comment="" />
+    <list default="true" id="36e2e8fa-2eb7-400b-8942-b93742451016" name="Changes" comment="Add gitignore and empty Main">
+      <change afterPath="$PROJECT_DIR$/Test2/src/tictactoe/CountPlayerCellsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test2/src/tictactoe/GameTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test2/src/tictactoe/MyTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test2/src/tictactoe/gamestate/GameDataTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test2/test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/PlayGroundPrinter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/gamestate/GameData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/gamestate/GameResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/gamestate/GameResultAbstract.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/gamestate/GameStateError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/gamestate/GameStateErrorType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/gamestate/GameStateSummary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/gamestate/IGameData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/gamestate/IGameResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/gamestate/IGameSetup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/gamestate/IGameState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tictactoe/gamestate/IGameStateError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicTacToe.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tictactoe/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tictactoe/Main.java" afterDir="false" />
+    </list>
+    <list id="2a12d128-1e0d-495c-85af-a53fe6bfacad" name="ignore" comment="ignore">
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JavaAutoRunManager">
+    <enabled-run-configurations>
+      <run-configuration type="JUnit" name="GameTest" />
+    </enabled-run-configurations>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2IC0KjfB8n1z3efYtOMMoYuayYe" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -15,20 +64,146 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path": "C:\\Users\\peter\\IdeaProjects\\TicTacToe\\Test2",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "true",
+    "Repository.Attach.JavaDocs": "true",
+    "Repository.Attach.Sources": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "jbr-17",
+    "last_opened_file_path": "C:/Users/peter/IdeaProjects/TicTacToe/src/tictactoe",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Global Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\peter\IdeaProjects\TicTacToe\src\tictactoe" />
+      <recent name="C:\Users\peter\IdeaProjects\TicTacToe\test" />
+      <recent name="C:\Users\peter\IdeaProjects\TicTacToe\test\tictactoe" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\peter\IdeaProjects\TicTacToe\Test2\src\tictactoe" />
+      <recent name="C:\Users\peter\IdeaProjects\TicTacToe\Test2\lib" />
+      <recent name="C:\Users\peter\IdeaProjects\TicTacToe" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.GameTest">
+    <configuration name="GameTest$AskMoveTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tictactoe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tictactoe.GameTest" />
+      <option name="MAIN_CLASS_NAME" value="tictactoe.GameTest$AskMoveTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tictactoe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tictactoe" />
+      <option name="MAIN_CLASS_NAME" value="tictactoe.GameTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MyTest.machWas" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tictactoe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tictactoe" />
+      <option name="MAIN_CLASS_NAME" value="tictactoe.MyTest" />
+      <option name="METHOD_NAME" value="machWas" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.GameTest" />
+        <item itemvalue="JUnit.GameTest$AskMoveTest" />
+        <item itemvalue="JUnit.MyTest.machWas" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="36e2e8fa-2eb7-400b-8942-b93742451016" name="Changes" comment="" />
+      <changelist id="2a12d128-1e0d-495c-85af-a53fe6bfacad" name="ignore" comment="" />
       <created>1669670200918</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1669670200918</updated>
+      <workItem from="1669670202264" duration="4977000" />
+      <workItem from="1669756258767" duration="5172000" />
+      <workItem from="1669762102681" duration="102000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial state, new java project in intellij">
+      <created>1669670365818</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669670365818</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add gitignore and empty Main">
+      <created>1669671247161</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1669671247161</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial state, new java project in intellij" />
+    <MESSAGE value="Add gitignore and empty Main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add gitignore and empty Main" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
