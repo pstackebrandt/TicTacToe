@@ -10,7 +10,6 @@ import java.awt.*;
 import java.util.Scanner;
 
 class GameTest {
-    // todo activate nested test classes
     @Nested
     class AskMoveTest {
         @Test

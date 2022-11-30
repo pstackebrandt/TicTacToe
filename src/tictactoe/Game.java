@@ -17,11 +17,12 @@ import static java.util.Optional.empty;
  * different playground dimensions.
  */
 public class Game {
-    private final int playGroundRows = 3;
-    private final int playGroundColumns = 3;
+    private static final String VALID_STATE_CHARS_STRING = "OX_";
+    private static final int PLAY_GROUND_ROWS = 3;
+    private static final int PLAY_GROUND_COLUMNS = 3;
+    private static final String START_SITUATION_OF_3_X_3_GAME = "_________";
     private final Scanner scanner = new Scanner(System.in);
 
-    private final static String ValidStateCharsString = "OX_";
     private IGameData gameData;
 
     /**
@@ -43,29 +44,39 @@ public class Game {
      * Manages the game.
      */
     public void run(String mode) {
-        //System.out.println("Begin run()");
+        System.out.println("Begin run()");
 
-        // get initial game state
-        String gameStateLine;
-        if (mode.equals("test")) {
-            gameStateLine = "_________";
-        } else {
-            gameStateLine = cleanGameStateLine(getInitialGameState(scanner));
-        }
-
-        this.gameData = new GameData(gameStateLine);
+        initializeGame(mode);
 
         // print game state
         var printer = new PlayGroundPrinter(this.gameData.getGameStateSquare());
         printer.printPlayGround();
 
+        loopGame();
+        System.out.println("End run()");
+    }
+
+    private void initializeGame(String mode) {
+        // get initial game state
+        String gameStateLine = switch (mode) {
+            case "game" -> START_SITUATION_OF_3_X_3_GAME;
+            case "test" -> START_SITUATION_OF_3_X_3_GAME;
+            default -> cleanGameStateLine(getInitialGameState(scanner));
+        };
+
+        this.gameData = new GameData(gameStateLine, Player.X);
+    }
+
+    private void loopGame() {
+        PlayGroundPrinter printer;
         // get first move of player x
-        this.makeMove(Player.X);
+        this.makeMove(this.gameData.getCurrentPlayer());
 
         // print changed game state
         printer = new PlayGroundPrinter(this.gameData.getGameStateSquare());
         printer.printPlayGround();
-        //System.out.println("End run()");
+
+
     }
 
     /**
@@ -85,7 +96,7 @@ public class Game {
      * Coordinates are 0 based.
      */
     protected Point askMove(Player player, Scanner scanner) {
-        //System.out.println("Begin askMove()");
+        System.out.println("Begin askMove()");
         int row;
         int col;
         boolean isValidMove = false;
@@ -97,7 +108,7 @@ public class Game {
             col = 0;
 
             // ask user for move
-            //System.out.println("Please enter move eg. 1 1 (row column)");
+            System.out.println("Please enter move eg. 1 1 (row column)");
 
             Integer number = getNumberFromConsole(scanner);
 
@@ -152,13 +163,14 @@ public class Game {
      * @param col first col has number 0
      */
     protected boolean isCellFree(int row, int col, String gameStateLine) {
-        final int position = row * playGroundRows + col;
+        final int position = row * PLAY_GROUND_ROWS + col;
 
         return gameStateLine.charAt(position) == '_';
     }
 
     /**
      * Returns whether move is valid
+     *
      * @param coordinate Must be 0 based.
      */
     protected boolean isCoordinateWithinBounds(Point coordinate) {
@@ -166,8 +178,8 @@ public class Game {
 
         if (coordinate.x < 0 ||
                 coordinate.y < 0 ||
-                coordinate.x >= playGroundRows ||
-                coordinate.y >= playGroundRows) {
+                coordinate.x >= PLAY_GROUND_ROWS ||
+                coordinate.y >= PLAY_GROUND_ROWS) {
             isWithin = false;
         }
 
@@ -178,14 +190,14 @@ public class Game {
         // loop until got valid game state
         String gameState;
         boolean gameStateIsValid;
-        //System.out.println("Please enter an initial game state like ___XOO___");
+        System.out.println("Please enter an initial game state like ___XOO___");
 
         do {
             // ask user for game state
             if (scanner.hasNext()) {
                 gameState = scanner.nextLine();
             } else {
-                gameState = "_________"; // We will get such case only within tests.
+                gameState = START_SITUATION_OF_3_X_3_GAME; // We will get such case only within tests.
             }
 
             // optimize input
@@ -203,7 +215,8 @@ public class Game {
             //    must contain only valid chars
             gameStateIsValid = isGameStateConsistsOfValidChars(gameState);
             if (!gameStateIsValid) {
-                System.out.println("Please enter game state which contains characters  " + ValidStateCharsString + " only!");
+                System.out.println("Please enter game state which contains characters  " +
+                        VALID_STATE_CHARS_STRING + " only!");
                 gameState = null;
             }
         } while (gameState == null);
@@ -214,7 +227,7 @@ public class Game {
     protected boolean isGameStateConsistsOfValidChars(String gameState) {
         int correctChars = 0;
         for (char currentStateChar : gameState.toCharArray()) {
-            for (char currentAllowedChar : ValidStateCharsString.toCharArray()) {
+            for (char currentAllowedChar : VALID_STATE_CHARS_STRING.toCharArray()) {
                 if (currentStateChar == currentAllowedChar) {
                     correctChars++;
                 }
@@ -238,7 +251,7 @@ public class Game {
      * @return cells count
      */
     private int getCellsCount() {
-        return playGroundRows * playGroundColumns;
+        return PLAY_GROUND_ROWS * PLAY_GROUND_COLUMNS;
     }
 
     /**
@@ -278,7 +291,7 @@ public class Game {
 
         // must contain only _, X, O (letter)
         for (String character : state.split("")) {
-            if (!ValidStateCharsString.contains(character)) {
+            if (!VALID_STATE_CHARS_STRING.contains(character)) {
                 return false;
             }
         }
@@ -301,8 +314,8 @@ public class Game {
     public String stateToString(char[][] state) {
         var result = new StringBuilder();
 
-        for (int row = 0; row < playGroundRows; row++) {
-            for (int col = 0; col < playGroundColumns; col++) {
+        for (int row = 0; row < PLAY_GROUND_ROWS; row++) {
+            for (int col = 0; col < PLAY_GROUND_COLUMNS; col++) {
                 result.append(state[row][col]);
             }
         }
@@ -400,7 +413,7 @@ public class Game {
     private int getWinLinesCount(IGameState gameState, Player player) {
         var linesCount = new AtomicInteger();
 
-        final char cellChar =  player.equals(Player.X) ? gameState.getPlayerXStateCharacter()
+        final char cellChar = player.equals(Player.X) ? gameState.getPlayerXStateCharacter()
                 : gameState.getPlayerOStateCharacter();
 
         final var workLine = gameState.getGameStateLine().replaceAll(String.valueOf(cellChar), "#");

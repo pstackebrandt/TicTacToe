@@ -11,12 +11,20 @@ public class GameData extends GameResultAbstract implements IGameData {
 
     public GameData(String stateLine) {
         this.stateLine = stateLine;
+        this.currentPlayer = Player.X;
+    }
+
+    public GameData(String stateLine, Player startPlayer) {
+        this(stateLine);
+        this.currentPlayer = startPlayer;
     }
 
     /**
      * Describes each cell of the play ground. Contains no formatting.
      */
     private String stateLine;
+
+    private Player currentPlayer;
 
     public int getCellsCount() {
         return stateLine.length();
@@ -28,6 +36,21 @@ public class GameData extends GameResultAbstract implements IGameData {
 
     public int getPlayGroundColumnsCount() {
         return 3;
+    }
+
+    @Override
+    public Player getCurrentPlayer() {
+        return this.currentPlayer;
+    }
+
+    /**
+     * Set player who plays his turn next.
+     */
+    @Override
+    public void setCurrentPlayer(Player nextPlayer) {
+        if (this.currentPlayer != nextPlayer){
+            this.currentPlayer = nextPlayer;
+        }
     }
 
     public String getGameStateLine() {
