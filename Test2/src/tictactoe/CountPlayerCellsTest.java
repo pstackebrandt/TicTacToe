@@ -1,10 +1,12 @@
 package tictactoe;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class CountPlayerCellsTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-    public void test_should_detect_3_cells_of_player_x() {
+class CountPlayerCellsTest {
+    @Test
+     void test_should_detect_3_cells_of_player_x() {
         final var stateLine = "_O_X__X_X";
         final var player = Player.X;
 
@@ -13,7 +15,8 @@ public class CountPlayerCellsTest extends TestCase {
         assertEquals(3, result);
     }
 
-    public void test_should_detect_1_cell_of_player_o() {
+    @Test
+     void test_should_detect_1_cell_of_player_o() {
         final var stateLine = "_O_X__X_X";
         final var player = Player.O;
 
