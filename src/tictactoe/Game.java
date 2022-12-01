@@ -53,6 +53,7 @@ public class Game {
         printer.printPlayGround();
 
         loopGame();
+        printGameResult();
         System.out.println("End run()");
     }
 
@@ -68,15 +69,29 @@ public class Game {
     }
 
     private void loopGame() {
-        PlayGroundPrinter printer;
-        // get first move of player x
-        this.makeMove(this.gameData.getCurrentPlayer());
+        boolean gameIsOn = true;
+        while (gameIsOn) {
+            this.makeMove(this.gameData.getCurrentPlayer());
 
-        // print changed game state
-        printer = new PlayGroundPrinter(this.gameData.getGameStateSquare());
-        printer.printPlayGround();
+            // print changed game state
+            PlayGroundPrinter printer = new PlayGroundPrinter(this.gameData.getGameStateSquare());
+            printer.printPlayGround();
 
+            IGameResult gameResult = getGameResult(this.gameData);
+            if (gameResult.getGameStateSummary() == GameStateSummary.NotFinished) {
+                setNextPlayer();
+            } else {
+                gameIsOn = false;
+            }
+        }
+    }
 
+    void setNextPlayer() {
+        this.gameData.setCurrentPlayer(calculateNextPlayer(this.gameData.getCurrentPlayer()));
+    }
+
+    public static Player calculateNextPlayer(Player current) {
+        return current == Player.X ? Player.O : Player.X;
     }
 
     /**
@@ -85,7 +100,7 @@ public class Game {
      * @param player of this move.
      */
     private void makeMove(Player player) {
-        Point move = askMove(player, scanner);
+        Point move = askValidMove(player, scanner);
 
         // add move data to game data
         this.gameData.addMove(move.x, move.y, player);
@@ -95,7 +110,7 @@ public class Game {
      * Returns coordinates of a valid move.
      * Coordinates are 0 based.
      */
-    protected Point askMove(Player player, Scanner scanner) {
+    protected Point askValidMove(Player player, Scanner scanner) {
         System.out.println("Begin askMove()");
         int row;
         int col;
@@ -359,9 +374,8 @@ public class Game {
 
         // Check win state of game
         result = getWinState(gameState); //x, o, draw, GameNotFinished, erroneous state
-        if (result.isPresent()) return result.get();
-
-        return new GameResult(GameStateSummary.Unknown); // is error
+        // is error
+        return result.orElseGet(() -> new GameResult(GameStateSummary.Unknown));
     }
 
     /**

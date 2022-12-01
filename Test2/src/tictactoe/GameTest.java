@@ -10,6 +10,24 @@ import java.awt.*;
 import java.util.Scanner;
 
 class GameTest {
+
+    @Nested
+    class calculateNextPlayer {
+        @Test
+        void test_should_calculate_next_player_X() {
+            Player expected = Player.O;
+            Player actual = Game.calculateNextPlayer(Player.X);
+            Assertions.assertEquals(expected, actual);
+        }
+
+        @Test
+        void test_should_calculate_next_player_O() {
+            Player expected = Player.X;
+            Player actual = Game.calculateNextPlayer(Player.O);
+            Assertions.assertEquals(expected, actual);
+        }
+    }
+
     @Nested
     class AskMoveTest {
         @Test
@@ -18,7 +36,7 @@ class GameTest {
             final var game = new Game(gameData);
 
             final var scanner = new Scanner("3 2"); // (row col)
-            final var actual = game.askMove(Player.X, scanner);
+            final var actual = game.askValidMove(Player.X, scanner);
             // internally we use order of 'row, column'
             Assertions.assertEquals(2, actual.x, "x (row) should be as expected."); // row
             Assertions.assertEquals(1, actual.y, "y (column) should be as expected."); // col
