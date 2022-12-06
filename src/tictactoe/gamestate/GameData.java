@@ -92,7 +92,6 @@ public class GameData extends GameResultAbstract implements IGameData {
     }
 
     public char getPlayerCharacter(Player player) {
-        // TODO add test
         if (player == Player.X) {
             return getPlayerXStateCharacter();
         }

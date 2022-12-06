@@ -49,7 +49,7 @@ public class Game {
         initializeGame(mode);
 
         // print game state
-        var printer = new PlayGroundPrinter(this.gameData.getGameStateSquare());
+        var printer = new PlayGroundPrinter(this.gameData.getGameStateSquare(), this.gameData.getEmptyCellStateCharacter());
         printer.printPlayGround();
 
         loopGame();
@@ -74,7 +74,8 @@ public class Game {
             this.makeMove(this.gameData.getCurrentPlayer());
 
             // print changed game state
-            PlayGroundPrinter printer = new PlayGroundPrinter(this.gameData.getGameStateSquare());
+            PlayGroundPrinter printer = new PlayGroundPrinter(this.gameData.getGameStateSquare(),
+                    this.gameData.getEmptyCellStateCharacter());
             printer.printPlayGround();
 
             IGameResult gameResult = getGameResult(this.gameData);
@@ -123,7 +124,7 @@ public class Game {
             col = 0;
 
             // ask user for move
-            System.out.println("Please enter move eg. 1 1 (row column)");
+            System.out.printf("Player %s please enter move. (eg. 1 1 (row column))%n", player);
 
             Integer number = getNumberFromConsole(scanner);
 
@@ -154,7 +155,6 @@ public class Game {
             }
         } while (!isValidMove);
 
-        //System.out.println("End askMove()");
         return new Point(row, col);
     }
 
@@ -189,16 +189,10 @@ public class Game {
      * @param coordinate Must be 0 based.
      */
     protected boolean isCoordinateWithinBounds(Point coordinate) {
-        boolean isWithin = true;
-
-        if (coordinate.x < 0 ||
-                coordinate.y < 0 ||
-                coordinate.x >= PLAY_GROUND_ROWS ||
-                coordinate.y >= PLAY_GROUND_ROWS) {
-            isWithin = false;
-        }
-
-        return isWithin;
+        return coordinate.x >= 0 &&
+                coordinate.y >= 0 &&
+                coordinate.x < PLAY_GROUND_ROWS &&
+                coordinate.y < PLAY_GROUND_ROWS;
     }
 
     protected String getInitialGameState(Scanner scanner) {
@@ -311,7 +305,7 @@ public class Game {
             }
         }
 
-        // todo ?? check whether count of state chars of both players is valid.
+        // Usefull extension: Check whether count of state chars of both players is valid.
 
         return true;
     }
@@ -366,7 +360,6 @@ public class Game {
      */
     private IGameResult getGameResult(final IGameState gameState) {
         Optional<IGameResult> result;
-        // checkCountOfCells // todo later?
 
         // find invalid states of cell count
         result = invalidatePlayerCellsCount(gameState.getGameStateLine());
@@ -381,8 +374,7 @@ public class Game {
     /**
      * Return information about winner, stalemate, game end without winner, erroneous state.
      */
-    // todo We don't seem to need an Optional. Remove!
-    private Optional<IGameResult> getWinState(IGameState gameState) {
+       private Optional<IGameResult> getWinState(IGameState gameState) {
         var gameStateError = checkPlayerCellsCountDifference(gameState);
         if (gameStateError.isPresent()) {
             return Optional.of(new GameResult(GameStateSummary.Impossible,
