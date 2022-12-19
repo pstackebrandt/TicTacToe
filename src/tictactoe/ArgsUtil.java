@@ -8,7 +8,7 @@ public class ArgsUtil {
     }
 
     /** Return all arguments in a map as pairs of key and value.
-     * Splits a string which contians a key-value-pair into key and value.
+     * Splits a string which contains a key-value-pair into key and value.
      * Delimiter of key and value is the first "=" character. A string without the
      * delimiter is returned as key with value null. */
     public static Map<String, String> argsToMap(String[] args) {

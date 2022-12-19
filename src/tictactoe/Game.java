@@ -20,15 +20,27 @@ public class Game {
     private static final String VALID_STATE_CHARS_STRING = "OX_";
     private static final int PLAY_GROUND_ROWS = 3;
     private static final int PLAY_GROUND_COLUMNS = 3;
-    private static final String START_SITUATION_OF_3_X_3_GAME = "_________";
+    private static final String START_SITUATION_OF_CLEAN_3_X_3_GAME = "_________";
     private final Scanner scanner = new Scanner(System.in);
 
     private IGameData gameData;
+    private String mode = "lesson";
 
     /**
      * Instantiate Game
      */
     public Game() {
+    }
+
+    /**
+     * Instantiate Game, set a specific mode.
+     */
+    public Game(String mode) {
+        if ("lesson".equals(mode) || "myGame".equals(mode) || "test".equals(mode)) {
+            this.mode = mode;
+        } else {
+            throw new IllegalArgumentException("Mode %s is unexpected. Check mode value!");
+        }
     }
 
     /**
@@ -43,10 +55,12 @@ public class Game {
     /**
      * Manages the game.
      */
-    public void run(String mode) {
-        System.out.println("Begin run()");
+    public void run() {
+        if(mode.equals("test")) {
+            System.out.println("Begin run()");
+        }
 
-        initializeGame(mode);
+        initializeGame();
 
         // print game state
         var printer = new PlayGroundPrinter(this.gameData.getGameStateSquare(), this.gameData.getEmptyCellStateCharacter());
@@ -54,18 +68,13 @@ public class Game {
 
         loopGame();
         printGameResult();
-        System.out.println("End run()");
+        if(mode.equals("test")) {
+            System.out.println("End run()");
+        }
     }
 
-    private void initializeGame(String mode) {
-        // get initial game state
-        String gameStateLine = switch (mode) {
-            case "game" -> START_SITUATION_OF_3_X_3_GAME;
-            case "test" -> START_SITUATION_OF_3_X_3_GAME;
-            default -> cleanGameStateLine(getInitialGameState(scanner));
-        };
-
-        this.gameData = new GameData(gameStateLine, Player.X);
+    private void initializeGame() {
+        this.gameData = new GameData(START_SITUATION_OF_CLEAN_3_X_3_GAME, Player.X);
     }
 
     private void loopGame() {
@@ -112,7 +121,9 @@ public class Game {
      * Coordinates are 0 based.
      */
     protected Point askValidMove(Player player, Scanner scanner) {
-        System.out.println("Begin askMove()");
+        if(mode.equals("test")) {
+            System.out.println("Begin askMove()");
+        }
         int row;
         int col;
         boolean isValidMove = false;
@@ -124,7 +135,9 @@ public class Game {
             col = 0;
 
             // ask user for move
-            System.out.printf("Player %s please enter move. (eg. 1 1 (row column))%n", player);
+            if(mode.equals("test") || mode.equals("myGame")) {
+                System.out.printf("Player %s please enter move. (eg. 1 1 (row column))%n", player);
+            }
 
             Integer number = getNumberFromConsole(scanner);
 
@@ -199,14 +212,16 @@ public class Game {
         // loop until got valid game state
         String gameState;
         boolean gameStateIsValid;
-        System.out.println("Please enter an initial game state like ___XOO___");
+        if(!mode.equals("lesson")) {
+            System.out.println("Please enter an initial game state like ___XOO___");
+        }
 
         do {
             // ask user for game state
             if (scanner.hasNext()) {
                 gameState = scanner.nextLine();
             } else {
-                gameState = START_SITUATION_OF_3_X_3_GAME; // We will get such case only within tests.
+                gameState = START_SITUATION_OF_CLEAN_3_X_3_GAME; // We will get such case only within tests.
             }
 
             // optimize input
@@ -216,7 +231,10 @@ public class Game {
             //    must contain 9 chars
             gameStateIsValid = isGameStateLineLengthValid(gameState);
             if (!gameStateIsValid) {
-                System.out.println("Please enter game state with " + getCellsCount() + " characters!");
+                if(!mode.equals("lesson")) {
+                    System.out.println("Please enter game state with " + getCellsCount() + " characters!");
+                }
+
                 gameState = null;
                 continue;
             }
@@ -224,8 +242,10 @@ public class Game {
             //    must contain only valid chars
             gameStateIsValid = isGameStateConsistsOfValidChars(gameState);
             if (!gameStateIsValid) {
-                System.out.println("Please enter game state which contains characters  " +
-                        VALID_STATE_CHARS_STRING + " only!");
+                if(!mode.equals("lesson")) {
+                    System.out.println("Please enter game state which contains characters  " +
+                            VALID_STATE_CHARS_STRING + " only!");
+                }
                 gameState = null;
             }
         } while (gameState == null);
@@ -305,7 +325,7 @@ public class Game {
             }
         }
 
-        // Usefull extension: Check whether count of state chars of both players is valid.
+        // Useful extension: Check whether count of state chars of both players is valid.
 
         return true;
     }
