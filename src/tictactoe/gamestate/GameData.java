@@ -30,14 +30,6 @@ public class GameData extends GameResultAbstract implements IGameData {
         return stateLine.length();
     }
 
-    public int getPlayGroundRowsCount() {
-        return 3;
-    }
-
-    public int getPlayGroundColumnsCount() {
-        return 3;
-    }
-
     @Override
     public Player getCurrentPlayer() {
         return this.currentPlayer;
@@ -92,7 +84,6 @@ public class GameData extends GameResultAbstract implements IGameData {
     }
 
     public char getPlayerCharacter(Player player) {
-        // TODO add test
         if (player == Player.X) {
             return getPlayerXStateCharacter();
         }

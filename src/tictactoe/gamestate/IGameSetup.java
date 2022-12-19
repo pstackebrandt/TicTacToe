@@ -6,6 +6,4 @@ package tictactoe.gamestate;
  */
 public interface IGameSetup {
     int getCellsCount();
-    int getPlayGroundRowsCount();
-    int getPlayGroundColumnsCount();
 }
